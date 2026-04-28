@@ -6,7 +6,7 @@ This project is a clone of Shopify, a platform that allows users to create their
 
 - Multi-tenant architecture
 - Product management
-- Order management
+- Proper Order management
 - User authentication
 - Shopping cart
 - Checkout process
