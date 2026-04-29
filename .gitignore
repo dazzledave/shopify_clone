@@ -10,6 +10,11 @@
 !.yarn/releases
 !.yarn/versions
 
+# important documents
+shopify_clone_documentation.md
+Shopify_Clone_Technical_Documentation.pdf
+Shopify_Clone_Technical_Documentation.pptx
+
 # testing
 /coverage
 
