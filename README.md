@@ -1,4 +1,4 @@
-# 🚀 Shopify Clone: Premium Multi-Tenant E-commerce Platform
+#  Shopify Clone: Premium Multi-Tenant E-commerce Platform
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
@@ -7,9 +7,9 @@
 
 A high-performance, modern, and fully-featured Shopify clone built with the latest web technologies. This platform supports multi-tenancy, allowing multiple merchants to host their own unique storefronts on a single infrastructure.
 
-## ✨ Core Features
+## Core Features
 
-### 🏢 Multi-Tenant Architecture
+### Multi-Tenant Architecture
 - **Dynamic Subdomain Routing**: Seamlessly map subdomains to individual store instances.
 - **Isolated Data Layers**: Securely partitioned data for products, orders, and customers.
 
