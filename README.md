@@ -13,3 +13,7 @@ A high-performance, modern, and fully-featured Shopify clone built with the late
 - **Dynamic Subdomain Routing**: Seamlessly map subdomains to individual store instances.
 - **Isolated Data Layers**: Securely partitioned data for products, orders, and customers.
 
+### 🛍️ Merchant Experience (Admin Panel)
+- **Intuitive Dashboard**: Real-time sales analytics and traffic visualization.
+- **Product Management**: Full CRUD operations with support for variants, inventory tracking, and high-resolution image uploads.
+- **Order Fulfillment**: Efficiently manage incoming orders and track fulfillment status.
