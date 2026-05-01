@@ -23,3 +23,15 @@ A high-performance, modern, and fully-featured Shopify clone built with the late
 - **Real-Time Shopping Cart**: Smooth state management for a seamless add-to-cart experience.
 - **Secure Checkout**: Integrated with Stripe for globally trusted payment processing.
 
+## Technology Stack
+
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
+- **Database**: [PostgreSQL (Supabase)](https://supabase.com/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **State Management**: [Zustand](https://zustand-demo.pmnd.rs/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+
+
