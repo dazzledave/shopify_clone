@@ -17,3 +17,9 @@ A high-performance, modern, and fully-featured Shopify clone built with the late
 - **Intuitive Dashboard**: Real-time sales analytics and traffic visualization.
 - **Product Management**: Full CRUD operations with support for variants, inventory tracking, and high-resolution image uploads.
 - **Order Fulfillment**: Efficiently manage incoming orders and track fulfillment status.
+
+### 🎨 Storefront Experience
+- **Premium Design System**: Modern, responsive, and high-quality storefront layouts.
+- **Real-Time Shopping Cart**: Smooth state management for a seamless add-to-cart experience.
+- **Secure Checkout**: Integrated with Stripe for globally trusted payment processing.
+
