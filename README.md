@@ -34,4 +34,33 @@ A high-performance, modern, and fully-featured Shopify clone built with the late
 - **Icons**: [Lucide React](https://lucide.dev/)
 
 
+### How to run the project
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd shopify_clone
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env` file and add your credentials (see [PROJECT_GUIDE.md](./PROJECT_GUIDE.md) for details).
+
+4. **Initialize the database**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+
+
 
