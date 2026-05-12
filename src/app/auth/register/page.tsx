@@ -20,6 +20,12 @@ export default function RegisterPage() {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
 
     startTransition(() => {
       register({ name, email, password }).then((data) => {
@@ -93,6 +99,19 @@ export default function RegisterPage() {
               </label>
               <input
                 name="password"
+                type="password"
+                required
+                disabled={isPending}
+                className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-white outline-none transition-all focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50"
+                placeholder="••••••••"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2 px-1">
+                Confirm Password
+              </label>
+              <input
+                name="confirmPassword"
                 type="password"
                 required
                 disabled={isPending}
