@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { logout } from "@/actions/auth";
 import { useSession } from "next-auth/react";
 import { LogOut, LayoutDashboard, ShoppingBag, ShoppingCart, Users, Settings } from "lucide-react";
@@ -11,22 +13,23 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const { data: session } = useSession();
+  const pathname = usePathname();
 
   return (
     <div className="flex min-h-screen bg-[#0a0a0a]">
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/10 bg-black/50 backdrop-blur-2xl hidden md:block">
         <div className="flex h-16 items-center border-b border-white/10 px-6">
-          <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+          <Link href="/admin" className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
             Dhopify
-          </span>
+          </Link>
         </div>
         <nav className="space-y-1 p-4">
-          <NavItem icon={<LayoutDashboard size={18} />} label="Dashboard" active />
-          <NavItem icon={<ShoppingBag size={18} />} label="Products" />
-          <NavItem icon={<ShoppingCart size={18} />} label="Orders" />
-          <NavItem icon={<Users size={18} />} label="Customers" />
-          <NavItem icon={<Settings size={18} />} label="Settings" />
+          <NavItem href="/admin" icon={<LayoutDashboard size={18} />} label="Dashboard" active={pathname === "/admin"} />
+          <NavItem href="/admin/products" icon={<ShoppingBag size={18} />} label="Products" active={pathname.startsWith("/admin/products")} />
+          <NavItem href="/admin/orders" icon={<ShoppingCart size={18} />} label="Orders" active={pathname.startsWith("/admin/orders")} />
+          <NavItem href="/admin/customers" icon={<Users size={18} />} label="Customers" active={pathname.startsWith("/admin/customers")} />
+          <NavItem href="/admin/settings" icon={<Settings size={18} />} label="Settings" active={pathname.startsWith("/admin/settings")} />
         </nav>
       </aside>
       
@@ -54,15 +57,18 @@ export default function AdminLayout({
   );
 }
 
-function NavItem({ icon, label, active = false }: { icon: React.ReactNode; label: string; active?: boolean }) {
+function NavItem({ href, icon, label, active = false }: { href: string; icon: React.ReactNode; label: string; active?: boolean }) {
   return (
-    <div className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all cursor-pointer ${
-      active 
-        ? "bg-white/10 text-white font-medium" 
-        : "text-gray-400 hover:bg-white/5 hover:text-white"
-    }`}>
+    <Link 
+      href={href}
+      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all cursor-pointer ${
+        active 
+          ? "bg-white/10 text-white font-medium" 
+          : "text-gray-400 hover:bg-white/5 hover:text-white"
+      }`}
+    >
       {icon}
       {label}
-    </div>
+    </Link>
   );
 }
