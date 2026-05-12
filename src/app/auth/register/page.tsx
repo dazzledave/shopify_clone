@@ -36,8 +36,20 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#050505] px-4 selection:bg-blue-500/30">
-      <div className="w-full max-w-md space-y-8 rounded-3xl border border-white/5 bg-white/[0.02] p-10 backdrop-blur-3xl">
+    <div className="flex min-h-screen flex-col bg-[#050505] selection:bg-blue-500/30">
+      {/* Header */}
+      <nav className="flex h-20 items-center justify-between px-8 lg:px-16 border-b border-white/5">
+        <Link href="/" className="text-2xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+          DHOPIFY
+        </Link>
+        <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-gray-500">
+          Create Your Store Instance
+        </div>
+      </nav>
+
+      {/* Register Card */}
+      <div className="flex flex-1 items-center justify-center px-4 py-12">
+        <div className="w-full max-w-md space-y-8 rounded-3xl border border-white/5 bg-white/[0.02] p-10 backdrop-blur-3xl">
         <div className="text-center">
           <h2 className="text-3xl font-black tracking-tighter text-white uppercase italic">
             Create Store
@@ -122,6 +134,7 @@ export default function RegisterPage() {
             Sign in
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );
