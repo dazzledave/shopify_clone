@@ -29,7 +29,7 @@ export default function SettingsPage() {
                 </label>
                 <input 
                   type="text" 
-                  defaultValue="My Dhopify Store"
+                  placeholder="Enter your store name"
                   className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-sm text-white focus:border-blue-500/50 outline-none transition-all"
                 />
               </div>
@@ -40,23 +40,13 @@ export default function SettingsPage() {
                 <div className="flex">
                   <input 
                     type="text" 
-                    defaultValue="my-cool-shop"
+                    placeholder="your-store-name"
                     className="flex-1 bg-black/50 border border-white/10 rounded-l-xl py-3 px-4 text-sm text-white focus:border-blue-500/50 outline-none transition-all"
                   />
                   <div className="bg-white/5 border border-white/10 border-l-0 rounded-r-xl px-4 flex items-center text-xs font-bold text-gray-500 uppercase">
                     .dhopify.com
                   </div>
                 </div>
-              </div>
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2 px-1">
-                  Support Email
-                </label>
-                <input 
-                  type="email" 
-                  defaultValue="support@dhopify.com"
-                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-sm text-white focus:border-blue-500/50 outline-none transition-all"
-                />
               </div>
             </div>
 
@@ -66,14 +56,6 @@ export default function SettingsPage() {
                 Save Changes
               </button>
             </div>
-          </div>
-
-          <div className="p-8 rounded-3xl border border-red-500/10 bg-red-500/5 backdrop-blur-3xl space-y-4">
-            <h2 className="text-xl font-bold text-red-500 tracking-tight">Danger Zone</h2>
-            <p className="text-sm text-gray-400">Once you delete a store, there is no going back. Please be certain.</p>
-            <button className="px-6 py-3 bg-red-600/10 border border-red-600/20 text-red-500 rounded-xl font-bold text-sm hover:bg-red-600 hover:text-white transition-all uppercase tracking-wider">
-              Delete Store
-            </button>
           </div>
         </div>
       </div>
