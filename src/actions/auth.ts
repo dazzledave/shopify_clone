@@ -59,3 +59,7 @@ export const login = async (values: any) => {
 export const logout = async () => {
   await signOut({ redirectTo: "/auth/login" });
 };
+
+export const socialLogin = async (provider: "google" | "github") => {
+  await signIn(provider, { redirectTo: "/admin" });
+};

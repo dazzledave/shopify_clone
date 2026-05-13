@@ -2,7 +2,8 @@
 
 import React, { useState, useTransition } from "react";
 import Link from "next/link";
-import { login } from "@/actions/auth";
+import { login, socialLogin } from "@/actions/auth";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | undefined>("");
@@ -108,10 +109,16 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-4">
-          <button className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-bold uppercase transition-all hover:bg-white/10">
+          <button 
+            onClick={() => socialLogin("google")}
+            className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-bold uppercase transition-all hover:bg-white/10"
+          >
             Google
           </button>
-          <button className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-bold uppercase transition-all hover:bg-white/10">
+          <button 
+            onClick={() => socialLogin("github")}
+            className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-bold uppercase transition-all hover:bg-white/10"
+          >
             GitHub
           </button>
         </div>

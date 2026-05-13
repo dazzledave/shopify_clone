@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import Link from "next/link";
-import { register } from "@/actions/auth";
+import { register, socialLogin } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
