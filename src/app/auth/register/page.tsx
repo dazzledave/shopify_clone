@@ -108,6 +108,9 @@ export default function RegisterPage() {
                 className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-white outline-none transition-all focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50"
                 placeholder="••••••••"
               />
+              <p className="mt-2 text-[10px] text-gray-500 font-medium px-1 leading-relaxed">
+                Password must be at least 8 characters and include numbers and symbols.
+              </p>
             </div>
             <div>
               <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2 px-1">
