@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import Link from "next/link";
-import { register, socialLogin } from "@/actions/auth";
+import { register, login, socialLogin } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
@@ -46,10 +46,12 @@ export default function RegisterPage() {
         if (data?.error) {
           setError(data.error);
         } else {
-          setSuccess(data?.success);
-          setTimeout(() => {
+          setSuccess("Account created! Logging you in...");
+          
+          // Automatically sign in the user
+          login({ email, password }).then(() => {
             router.push("/onboarding");
-          }, 2000);
+          });
         }
       });
     });
