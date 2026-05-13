@@ -20,8 +20,11 @@ export default function AdminLayout({
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/10 bg-black/50 backdrop-blur-2xl hidden md:block">
         <div className="flex h-16 items-center border-b border-white/10 px-6">
-          <Link href="/admin" className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            Dhopify
+          <Link href="/admin" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Logo" className="h-6 w-6 object-contain" />
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+              Dhopify
+            </span>
           </Link>
         </div>
         <nav className="space-y-1 p-4">

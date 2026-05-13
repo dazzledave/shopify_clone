@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Dhopify | Premium Multi-Tenant E-commerce",
   description: "Build and scale your brand with Dhopify.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 import { AuthProvider } from "@/components/providers/session-provider";

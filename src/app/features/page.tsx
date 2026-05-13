@@ -7,8 +7,11 @@ export default function FeaturesPage() {
     <div className="min-h-screen bg-[#050505] text-white selection:bg-blue-500/30">
       {/* Navigation */}
       <nav className="flex h-20 items-center justify-between px-8 lg:px-16 border-b border-white/5 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
-        <Link href="/" className="text-2xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-          DHOPIFY
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/logo.png" alt="Logo" className="h-8 w-8 object-contain" />
+          <span className="text-2xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            DHOPIFY
+          </span>
         </Link>
         <div className="flex items-center gap-8 text-sm font-medium text-gray-400">
            <Link href="/features" className="text-white transition-colors">Features</Link>

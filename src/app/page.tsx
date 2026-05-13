@@ -5,9 +5,12 @@ export default function PlatformLandingPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-blue-500/30">
       <nav className="flex h-20 items-center justify-between px-8 lg:px-16 border-b border-white/5">
-        <div className="text-2xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-          DHOPIFY
-        </div>
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/logo.png" alt="Logo" className="h-8 w-8 object-contain" />
+          <div className="text-2xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            DHOPIFY
+          </div>
+        </Link>
         <div className="flex items-center gap-8 text-sm font-medium text-gray-400">
            <Link href="/features" className="hover:text-white cursor-pointer transition-colors">Features</Link>
            <Link href="/pricing" className="hover:text-white cursor-pointer transition-colors">Pricing</Link>

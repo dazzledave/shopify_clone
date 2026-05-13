@@ -31,8 +31,11 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col bg-[#050505] selection:bg-blue-500/30">
       {/* Header */}
       <nav className="flex h-20 items-center justify-between px-8 lg:px-16 border-b border-white/5">
-        <Link href="/" className="text-2xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-          DHOPIFY
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/logo.png" alt="Logo" className="h-6 w-6 object-contain" />
+          <div className="text-xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            DHOPIFY
+          </div>
         </Link>
         <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-gray-500">
           Platform Security Enabled
