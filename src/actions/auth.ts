@@ -12,6 +12,14 @@ export const register = async (values: any) => {
     return { error: "Missing fields" };
   }
 
+  // Server-side password validation
+  const hasNumber = /\d/.test(password);
+  const hasSymbol = /[!@#$%^&*(),.?":{}|<>_]/.test(password);
+  
+  if (password.length < 8 || !hasNumber || !hasSymbol) {
+    return { error: "Password does not meet strength requirements" };
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const existingUser = await db.user.findUnique({

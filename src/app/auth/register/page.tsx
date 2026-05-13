@@ -27,6 +27,20 @@ export default function RegisterPage() {
       return;
     }
 
+    // Password Validation Rules
+    const hasNumber = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>_]/.test(password);
+    
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
+    if (!hasNumber || !hasSymbol) {
+      setError("Password must contain at least one number and one symbol");
+      return;
+    }
+
     startTransition(() => {
       register({ name, email, password }).then((data) => {
         if (data?.error) {
