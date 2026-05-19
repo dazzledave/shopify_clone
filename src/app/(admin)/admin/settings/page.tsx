@@ -114,7 +114,7 @@ export default function SettingsPage() {
                   <InputGroup 
                     label="Store Name" 
                     value={storeData.name} 
-                    onChange={(val) => setStoreData({...storeData, name: val})}
+                    onChange={(val: string) => setStoreData({...storeData, name: val})}
                     placeholder="My Awesome Shop"
                   />
                   <InputGroup 
