@@ -35,6 +35,7 @@ export const createCategory = async (name: string) => {
     revalidatePath("/admin/products/new");
     return { success: "Category created successfully!", category };
   } catch (error) {
+    console.error("Error creating category:", error);
     return { error: "Failed to create category" };
   }
 };

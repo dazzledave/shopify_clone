@@ -94,7 +94,24 @@ export const getStore = async () => {
   const session = await auth();
   if (!session?.user?.id) return null;
 
-  return await db.store.findFirst({
+  let store = await db.store.findFirst({
     where: { userId: session.user.id },
   });
+
+  if (!store) {
+    try {
+      store = await db.store.create({
+        data: {
+          name: "My Store",
+          subdomain: `store-${session.user.id.slice(0, 5)}`,
+          userId: session.user.id,
+        },
+      });
+    } catch (error) {
+      console.error("Failed to auto-create store:", error);
+      return null;
+    }
+  }
+
+  return store;
 };

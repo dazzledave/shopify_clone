@@ -4,10 +4,16 @@ import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Plus, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { createProduct } from "@/actions/product";
+import { createProduct, updateProduct } from "@/actions/product";
 import { createCategory } from "@/actions/category";
 
-export default function ProductForm({ initialCategories }: { initialCategories: any[] }) {
+export default function ProductForm({
+  initialCategories,
+  initialProduct,
+}: {
+  initialCategories: any[];
+  initialProduct?: any;
+}) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [categories, setCategories] = useState(initialCategories);
@@ -16,18 +22,21 @@ export default function ProductForm({ initialCategories }: { initialCategories: 
   const [error, setError] = useState("");
   
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    categoryId: initialCategories.length > 0 ? initialCategories[0].id : "",
+    name: initialProduct?.name || "",
+    description: initialProduct?.description || "",
+    price: initialProduct?.price ? String(initialProduct.price) : "",
+    categoryId: initialProduct?.categoryId || (initialCategories.length > 0 ? initialCategories[0].id : ""),
   });
 
   const handleCreateCategory = async () => {
     if (!newCategoryName.trim()) return;
     
+    setError("");
     startTransition(async () => {
       const result = await createCategory(newCategoryName);
-      if (result.category) {
+      if (result.error) {
+        setError(result.error);
+      } else if (result.category) {
         setCategories([...categories, result.category]);
         setFormData({ ...formData, categoryId: result.category.id });
         setShowNewCategory(false);
@@ -46,12 +55,23 @@ export default function ProductForm({ initialCategories }: { initialCategories: 
     }
 
     startTransition(async () => {
-      const result = await createProduct({
-        name: formData.name,
-        description: formData.description,
-        price: parseFloat(formData.price),
-        categoryId: formData.categoryId,
-      });
+      let result;
+
+      if (initialProduct) {
+        result = await updateProduct(initialProduct.id, {
+          name: formData.name,
+          description: formData.description,
+          price: parseFloat(formData.price),
+          categoryId: formData.categoryId,
+        });
+      } else {
+        result = await createProduct({
+          name: formData.name,
+          description: formData.description,
+          price: parseFloat(formData.price),
+          categoryId: formData.categoryId,
+        });
+      }
 
       if (result.error) {
         setError(result.error);
@@ -68,8 +88,12 @@ export default function ProductForm({ initialCategories }: { initialCategories: 
           <ArrowLeft size={18} />
         </Link>
         <div>
-          <h1 className="text-3xl font-black tracking-tighter text-white uppercase">Add Product</h1>
-          <p className="text-gray-400 text-sm">Create a new product for your store.</p>
+          <h1 className="text-3xl font-black tracking-tighter text-white uppercase">
+            {initialProduct ? "Edit Product" : "Add Product"}
+          </h1>
+          <p className="text-gray-400 text-sm">
+            {initialProduct ? "Update your product details." : "Create a new product for your store."}
+          </p>
         </div>
       </div>
 
@@ -128,6 +152,12 @@ export default function ProductForm({ initialCategories }: { initialCategories: 
                     type="text" 
                     value={newCategoryName}
                     onChange={(e) => setNewCategoryName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleCreateCategory();
+                      }
+                    }}
                     placeholder="New category..."
                     className="flex-1 bg-black/50 border border-white/10 rounded-xl py-2 px-3 text-sm text-white focus:border-blue-500/50 outline-none transition-all"
                   />

@@ -2,6 +2,7 @@ import React from "react";
 import { Plus, Search, Filter, ShoppingBag, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { getProducts } from "@/actions/product";
+import ProductActions from "./ProductActions";
 
 export default async function ProductsPage() {
   const { products, error } = await getProducts();
@@ -46,7 +47,7 @@ export default async function ProductsPage() {
           </Link>
         </div>
       ) : (
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden backdrop-blur-3xl">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-3xl">
           <table className="w-full text-left">
             <thead className="bg-white/5 text-xs font-bold uppercase tracking-widest text-gray-500 border-b border-white/10">
               <tr>
@@ -62,6 +63,7 @@ export default async function ProductsPage() {
               {productList.map((product: any) => (
                 <ProductRow 
                   key={product.id}
+                  id={product.id}
                   name={product.name} 
                   status={product.isArchived ? "Draft" : "Active"} 
                   inventory="Unlimited" 
@@ -78,7 +80,7 @@ export default async function ProductsPage() {
   );
 }
 
-function ProductRow({ name, status, inventory, price, category, image }: any) {
+function ProductRow({ id, name, status, inventory, price, category, image }: any) {
   return (
     <tr className="hover:bg-white/[0.02] transition-colors group">
       <td className="px-6 py-4">
@@ -106,9 +108,7 @@ function ProductRow({ name, status, inventory, price, category, image }: any) {
         {category}
       </td>
       <td className="px-6 py-4 text-right">
-        <button className="p-2 text-gray-500 hover:text-white transition-colors">
-          <MoreHorizontal size={18} />
-        </button>
+        <ProductActions productId={id} />
       </td>
     </tr>
   );
