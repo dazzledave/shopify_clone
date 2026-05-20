@@ -13,6 +13,7 @@ export const getProducts = async () => {
       where: { storeId: store.id },
       include: {
         category: true,
+        images: true,
       },
       orderBy: { createdAt: "desc" },
     });
@@ -28,6 +29,7 @@ export const createProduct = async (data: {
   description: string;
   price: number;
   categoryId: string;
+  images?: { url: string }[];
 }) => {
   const store = await getStore();
   if (!store) return { error: "Store not found" };
@@ -35,8 +37,16 @@ export const createProduct = async (data: {
   try {
     const product = await db.product.create({
       data: {
-        ...data,
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        categoryId: data.categoryId,
         storeId: store.id,
+        images: {
+          createMany: {
+            data: data.images ?? [],
+          },
+        },
       },
     });
 
@@ -78,6 +88,7 @@ export const getProduct = async (id: string) => {
       },
       include: {
         category: true,
+        images: true,
       },
     });
 
@@ -96,18 +107,34 @@ export const updateProduct = async (
     description: string;
     price: number;
     categoryId: string;
+    images?: { url: string }[];
   }
 ) => {
   const store = await getStore();
   if (!store) return { error: "Store not found" };
 
   try {
+    // Delete existing images for this product
+    await db.image.deleteMany({
+      where: { productId: id },
+    });
+
     const product = await db.product.update({
       where: {
         id,
         storeId: store.id,
       },
-      data,
+      data: {
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        categoryId: data.categoryId,
+        images: {
+          createMany: {
+            data: data.images ?? [],
+          },
+        },
+      },
     });
 
     revalidatePath("/admin/products");

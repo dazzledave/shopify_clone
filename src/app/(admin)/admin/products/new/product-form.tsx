@@ -20,6 +20,8 @@ export default function ProductForm({
   const [showNewCategory, setShowNewCategory] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
   const [error, setError] = useState("");
+  const [imageUrls, setImageUrls] = useState<string[]>(initialProduct?.images ? initialProduct.images.map((img: any) => img.url) : []);
+  const [currentImageUrl, setCurrentImageUrl] = useState("");
   
   const [formData, setFormData] = useState({
     name: initialProduct?.name || "",
@@ -45,6 +47,17 @@ export default function ProductForm({
     });
   };
 
+  const handleAddImageUrl = () => {
+    if (currentImageUrl.trim() && !imageUrls.includes(currentImageUrl.trim())) {
+      setImageUrls([...imageUrls, currentImageUrl.trim()]);
+      setCurrentImageUrl("");
+    }
+  };
+
+  const handleRemoveImageUrl = (indexToRemove: number) => {
+    setImageUrls(imageUrls.filter((_, idx) => idx !== indexToRemove));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -56,21 +69,18 @@ export default function ProductForm({
 
     startTransition(async () => {
       let result;
+      const payload = {
+        name: formData.name,
+        description: formData.description,
+        price: parseFloat(formData.price),
+        categoryId: formData.categoryId,
+        images: imageUrls.map(url => ({ url })),
+      };
 
       if (initialProduct) {
-        result = await updateProduct(initialProduct.id, {
-          name: formData.name,
-          description: formData.description,
-          price: parseFloat(formData.price),
-          categoryId: formData.categoryId,
-        });
+        result = await updateProduct(initialProduct.id, payload);
       } else {
-        result = await createProduct({
-          name: formData.name,
-          description: formData.description,
-          price: parseFloat(formData.price),
-          categoryId: formData.categoryId,
-        });
+        result = await createProduct(payload);
       }
 
       if (result.error) {
@@ -99,6 +109,7 @@ export default function ProductForm({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
+          {/* General Details */}
           <div className="p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-3xl space-y-6">
             <div>
               <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2 px-1">Product Name *</label>
@@ -120,6 +131,61 @@ export default function ProductForm({
                 rows={4}
                 className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-sm text-white focus:border-blue-500/50 outline-none transition-all resize-none"
               />
+            </div>
+          </div>
+
+          {/* Product Images */}
+          <div className="p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-3xl space-y-6">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2 px-1">Product Images</label>
+              <p className="text-gray-400 text-xs mb-4 px-1">Add one or more image URLs for this product. Press enter or click Add.</p>
+              
+              <div className="flex gap-2 mb-4">
+                <input 
+                  type="text" 
+                  value={currentImageUrl}
+                  onChange={(e) => setCurrentImageUrl(e.target.value)}
+                  placeholder="Paste image URL (e.g., https://images.unsplash.com/...)"
+                  className="flex-1 bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-sm text-white focus:border-blue-500/50 outline-none transition-all"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleAddImageUrl();
+                    }
+                  }}
+                />
+                <button 
+                  type="button"
+                  onClick={handleAddImageUrl}
+                  className="px-5 py-3 bg-white text-black hover:bg-gray-200 transition-colors rounded-xl font-bold text-sm uppercase tracking-wider flex items-center gap-2"
+                >
+                  <Plus size={16} />
+                  Add
+                </button>
+              </div>
+
+              {imageUrls.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {imageUrls.map((url, index) => (
+                    <div key={index} className="relative group aspect-square rounded-2xl border border-white/10 overflow-hidden bg-black/50">
+                      <img src={url} alt={`Preview ${index + 1}`} className="h-full w-full object-cover transition-transform group-hover:scale-105 duration-300" />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button 
+                          type="button"
+                          onClick={() => handleRemoveImageUrl(index)}
+                          className="px-3 py-1.5 bg-red-600 hover:bg-red-700 transition-colors text-white rounded-lg font-bold text-xs uppercase tracking-wider"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-8 rounded-2xl border border-dashed border-white/10 bg-white/[0.01]">
+                  <p className="text-gray-500 text-xs">No images added yet.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

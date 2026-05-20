@@ -69,7 +69,7 @@ export default async function ProductsPage() {
                   inventory="Unlimited" 
                   price={`$${Number(product.price).toFixed(2)}`} 
                   category={product.category.name}
-                  image="📦"
+                  image={product.images?.[0]?.url}
                 />
               ))}
             </tbody>
@@ -85,8 +85,12 @@ function ProductRow({ id, name, status, inventory, price, category, image }: any
     <tr className="hover:bg-white/[0.02] transition-colors group">
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-lg bg-white/5 flex items-center justify-center text-xl">
-            {image}
+          <div className="h-10 w-10 rounded-lg bg-white/5 flex items-center justify-center text-xl overflow-hidden">
+            {image ? (
+              <img src={image} alt={name} className="h-full w-full object-cover" />
+            ) : (
+              "📦"
+            )}
           </div>
           <span className="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">{name}</span>
         </div>

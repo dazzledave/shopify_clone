@@ -27,6 +27,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     description: product.description,
     price: Number(product.price),
     categoryId: product.categoryId,
+    images: product.images ? product.images.map((img: any) => ({ id: img.id, url: img.url })) : [],
   };
 
   return (
